@@ -1,3 +1,4 @@
+import 'package:dart_lesson/library/widgets/Inherited/provider.dart';
 import 'package:dart_lesson/ui/theme/app_button_style.dart';
 import 'package:dart_lesson/ui/widgets/auth/auth_model.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,7 @@ class _FormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.read(context)?.model;
+    final model = NotifierProvider.read<AuthModel>(context);
     const textStyle = TextStyle(
       fontSize: 16,
       color: Color(0xFF212529),
@@ -159,7 +160,7 @@ class _AuthButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.watch(context)?.model;
+    final model = NotifierProvider.watch<AuthModel>(context);
     const color = Color(0xFF4873E0);
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
@@ -169,7 +170,7 @@ class _AuthButtonWidget extends StatelessWidget {
             height: 15,
             child: CircularProgressIndicator(strokeWidth: 2),
           )
-        : const   Text('Login');
+        : const Text('Login');
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
@@ -195,7 +196,8 @@ class _ErrorMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final errorMessage = AuthProvider.watch(context)?.model.errorMessage;
+    final errorMessage =
+        NotifierProvider.watch<AuthModel>(context)?.errorMessage;
     if (errorMessage == null) return const SizedBox.shrink();
 
     return Padding(
