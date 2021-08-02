@@ -1,5 +1,7 @@
 import 'package:dart_lesson/domain/data_providers/session_data_provider.dart';
-import 'package:dart_lesson/ui/widgets/main_screen/Home_page.dart';
+import 'package:dart_lesson/library/widgets/Inherited/provider.dart';
+import 'package:dart_lesson/ui/widgets/main_screen/eat_list_model.dart';
+import 'package:dart_lesson/ui/widgets/main_screen/eat_list_widget.dart';
 import 'package:dart_lesson/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:dart_lesson/ui/widgets/news/new_widget.dart';
 import 'package:dart_lesson/ui/widgets/tv_show_list/tv_show_list_widget.dart';
@@ -14,12 +16,19 @@ class MainScreenWidget extends StatefulWidget {
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
+  final eatListModel = EatListModel();
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
     setState(() {
       _selectedTab = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    eatListModel.loadEats();
   }
 
   @override
@@ -37,7 +46,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          const HomePage(),
+          NotifierProvider(model: eatListModel, child: const EatListWidget()),
           const NewsWidget(),
           MovieListWidget(),
           TWShowListWidget(),

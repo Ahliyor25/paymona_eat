@@ -23,7 +23,7 @@ class MainNavigation {
           child: const AuthWidget(),
         ),
     MainNavigationRouteNames.mainScreen: (context) =>
-        NotifierProvider(model: MainScreenModel(), child: MainScreenWidget()),
+        NotifierProvider(model: MainScreenModel(), child: const MainScreenWidget()),
   };
   Route<Object> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
