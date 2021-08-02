@@ -13,7 +13,7 @@ class ApiClientException implements Exception {
 
 class ApiClient {
   final _client = HttpClient();
-  static const _host = 'http://103.246.146.95:7005/';
+  static const _host = "http://103.246.146.95:7005/";
   static const api_key =
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyNzc0MDY0NiwianRpIjoiMGI2OTMwMDMtOGFlNi00MzQ1LWJjOWYtZTcxNTU3ZjMxNzI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjI3NzQwNjQ2LCJleHAiOjE2Mjc3NDE1NDZ9.sfK5liqeUgzwOaNd3CIzlp8KMWI5KZhI-ekW4NaOcBw';
   // static const _imageUrl = 'https://image.tmdb.org/t/p/w500';

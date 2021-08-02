@@ -81,15 +81,85 @@ class EatListWidget extends StatelessWidget {
                     itemCount: model.eats.length,
                     itemBuilder: (BuildContext context, int index) {
                       final eat = model.eats[index];
-                      final image = eat.img;
-                      if (image == null) {
-                        Image.network(image!);
-                      } else {
-                        const SizedBox.shrink();
-                      }
+                      final path_image = eat.img;
+
+                      path_image != null
+                          ? Image.network(path_image)
+                          : const SizedBox.shrink();
                       return Stack(children: [
-                        makeItem(
-                            image: image, title: eat.title, price: eat.price),
+                        AspectRatio(
+                          aspectRatio: 1 / 1.5,
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  "$path_image",
+                                  scale: 1.0,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      stops: [
+                                        .2,
+                                        .9
+                                      ],
+                                      colors: [
+                                        Colors.black.withOpacity(.9),
+                                        Colors.black.withOpacity(.3),
+                                      ])),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.topRight,
+                                      child: Icon(
+                                        Icons.favorite,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          eat.price,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          eat.title,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        // makeItem(
+                        //     image: path_image ?? '0',
+                        //     title: eat.title,
+                        //     price: eat.price),
                         Material(
                           color: Colors.transparent,
                           child: InkWell(
@@ -132,68 +202,70 @@ class EatListWidget extends StatelessWidget {
     );
   }
 
-  Widget makeItem(
-      {required String image, required String title, required String price}) {
-    return AspectRatio(
-      aspectRatio: 1 / 1.5,
-      child: Container(
-        margin: const EdgeInsets.only(right: 20),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: AssetImage(
-                image,
-                bundle: null,
-              ),
-              fit: BoxFit.cover,
-            )),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(begin: Alignment.bottomCenter, stops: [
-                .2,
-                .9
-              ], colors: [
-                Colors.black.withOpacity(.9),
-                Colors.black.withOpacity(.3),
-              ])),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Align(
-                  alignment: Alignment.topRight,
-                  child: Icon(
-                    Icons.favorite,
-                    color: Colors.white,
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      price,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      title,
-                      style: const TextStyle(color: Colors.white, fontSize: 20),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+//   Widget makeItem(
+//       {required String image, required String title, required String price}) {
+//     // return AspectRatio(
+//     //   aspectRatio: 1 / 1.5,
+//     //   child: Container(
+//     //     margin: const EdgeInsets.only(right: 20),
+//     //     decoration: BoxDecoration(
+//     //       borderRadius: BorderRadius.circular(20),
+//     //       image: DecorationImage(
+//     //         image: NetworkImage(
+//     //           image,
+//     //           scale: 1.0,
+//     //         ),
+//     //         fit: BoxFit.cover,
+//     //       ),
+//     //     ),
+//     //     child: Container(
+//     //       decoration: BoxDecoration(
+//     //           borderRadius: BorderRadius.circular(20),
+//     //           gradient: LinearGradient(begin: Alignment.bottomCenter, stops: [
+//     //             .2,
+//     //             .9
+//     //           ], colors: [
+//     //             Colors.black.withOpacity(.9),
+//     //             Colors.black.withOpacity(.3),
+//     //           ])),
+//     //       child: Padding(
+//     //         padding: const EdgeInsets.all(20.0),
+//     //         child: Column(
+//     //           crossAxisAlignment: CrossAxisAlignment.start,
+//     //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//     //           children: [
+//     //             const Align(
+//     //               alignment: Alignment.topRight,
+//     //               child: Icon(
+//     //                 Icons.favorite,
+//     //                 color: Colors.white,
+//     //               ),
+//     //             ),
+//     //             Column(
+//     //               crossAxisAlignment: CrossAxisAlignment.start,
+//     //               children: [
+//     //                 Text(
+//     //                   price,
+//     //                   style: const TextStyle(
+//     //                       color: Colors.white,
+//     //                       fontSize: 40,
+//     //                       fontWeight: FontWeight.bold),
+//     //                 ),
+//     //                 const SizedBox(
+//     //                   height: 10,
+//     //                 ),
+//     //                 Text(
+//     //                   title,
+//     //                   style: const TextStyle(color: Colors.white, fontSize: 20),
+//     //                 )
+//     //               ],
+//     //             )
+//     //           ],
+//     //         ),
+//     //       ),
+//     //     ),
+//     //   ),
+//     // );
+//   }
+// }
 }
