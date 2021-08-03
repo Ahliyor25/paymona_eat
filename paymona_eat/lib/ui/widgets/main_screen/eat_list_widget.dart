@@ -95,7 +95,7 @@ class EatListWidget extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  "$path_image",
+                                  '$path_image',
                                   scale: 1.0,
                                 ),
                                 fit: BoxFit.cover,
