@@ -36,7 +36,7 @@ class EatListWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Food Delivery',
+                    'Категория',
                     style: TextStyle(
                         color: Colors.grey[80],
                         fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class EatListWidget extends StatelessWidget {
                   Container(
                       height: 50,
                       child: ListView.builder(
-                          itemCount: model.eats.length,
+                          itemCount: 1,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
                             // final eat = model.eats[index];
@@ -63,7 +63,7 @@ class EatListWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'Free Delivery',
+                'Еда',
                 style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 20,
@@ -80,12 +80,10 @@ class EatListWidget extends StatelessWidget {
                     itemExtent: 203,
                     itemCount: model.eats.length,
                     itemBuilder: (BuildContext context, int index) {
+                      model.showEatAtIndex(index);
                       final eat = model.eats[index];
                       final path_image = eat.img;
 
-                      path_image != null
-                          ? Image.network(path_image)
-                          : const SizedBox.shrink();
                       return Stack(children: [
                         AspectRatio(
                           aspectRatio: 1 / 1.5,
@@ -94,12 +92,12 @@ class EatListWidget extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
-                                image: NetworkImage(
-                                  '$path_image',
-                                  scale: 1.0,
-                                ),
-                                fit: BoxFit.cover,
-                              ),
+                                  image: NetworkImage(
+                                    '$path_image',
+                                    scale: 1.0,
+                                  ),
+                                  fit: BoxFit.cover,
+                                  scale: 1),
                             ),
                             child: Container(
                               decoration: BoxDecoration(

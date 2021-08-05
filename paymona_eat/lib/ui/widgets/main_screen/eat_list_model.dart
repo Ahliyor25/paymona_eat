@@ -8,11 +8,25 @@ class EatListModel extends ChangeNotifier {
   final _apiClient = ApiClient();
   final _eats = <Eat>[];
   List<Eat> get eats => List.unmodifiable(_eats);
-
+  late int _page = 0;
+  var _isLoad = false;
   Future<void> loadEats() async {
-    final eatsRes = await _apiClient.popularEat(1);
-    _eats.addAll(eatsRes.eats);
-    notifyListeners();
+    final nextpage = _page + 1;
+    try {
+      final eatsRes = await _apiClient.popularEat(nextpage);
+
+      if (_isLoad || eatsRes.count <= _page) return;
+      _isLoad = true;
+      if (eatsRes.count > _page) {
+        _page++;
+      }
+      ;
+      _eats.addAll(eatsRes.eats);
+      _isLoad = false;
+      notifyListeners();
+    } catch (e) {
+      _isLoad = false;
+    }
   }
 
   void onEatTap(BuildContext context, int index) {
@@ -21,5 +35,10 @@ class EatListModel extends ChangeNotifier {
       MainNavigationRouteNames.movieDetails,
       arguments: id,
     );
+  }
+
+  void showEatAtIndex(int index) {
+    if (index < _eats.length - 1) return;
+    loadEats();
   }
 }
