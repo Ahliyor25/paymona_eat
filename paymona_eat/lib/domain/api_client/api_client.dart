@@ -107,27 +107,25 @@ class ApiClient {
     return result;
   }
 
-
-// Чтобы загрузить каждый товар 
-   Future<EatDetails> eatDetails(int eatId) async {
+// Чтобы загрузить каждый товар
+  Future<EatDetails> eatDetails(int eatId) async {
     final parser = (dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = EatDetails.fromJson(jsonMap);
       return response;
     };
     final result = _get(
-      'main_slider/get/$eatId',
+      'main_slider/get/7',
       parser,
-      <String, dynamic>{
-        // 'api_key': api_key,
-        // 'page': eatId.toString(),
-      },
+      // <String, dynamic>{
+      //   // 'api_key': api_key,
+      //   // 'page': eatId.toString(),
+      // },
     );
     return result;
   }
 
-
- //Для проверки валидации кода 
+  //Для проверки валидации кода
   Future<String> _validateUser({
     required String username,
     required String password,
