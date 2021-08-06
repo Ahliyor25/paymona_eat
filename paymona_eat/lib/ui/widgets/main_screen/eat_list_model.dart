@@ -32,7 +32,7 @@ class EatListModel extends ChangeNotifier {
   void onEatTap(BuildContext context, int index) {
     final id = _eats[index].id;
     Navigator.of(context).pushNamed(
-      MainNavigationRouteNames.movieDetails,
+      MainNavigationRouteNames.eatsDetails,
       arguments: id,
     );
   }

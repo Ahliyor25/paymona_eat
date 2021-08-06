@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dart_lesson/domain/entity/eat_details.dart';
 import 'package:dart_lesson/domain/entity/popular_eat_res.dart';
 
 enum ApiClientExceptionType { Network, Auth, other }
@@ -106,6 +107,27 @@ class ApiClient {
     return result;
   }
 
+
+// Чтобы загрузить каждый товар 
+   Future<EatDetails> eatDetails(int eatId) async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = EatDetails.fromJson(jsonMap);
+      return response;
+    };
+    final result = _get(
+      'main_slider/get/$eatId',
+      parser,
+      <String, dynamic>{
+        // 'api_key': api_key,
+        // 'page': eatId.toString(),
+      },
+    );
+    return result;
+  }
+
+
+ //Для проверки валидации кода 
   Future<String> _validateUser({
     required String username,
     required String password,

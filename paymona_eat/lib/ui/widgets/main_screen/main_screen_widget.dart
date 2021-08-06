@@ -46,7 +46,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          NotifierProvider(model: eatListModel, child: const EatListWidget()),
+          NotifierProvider(
+              create: () => eatListModel, child: const EatListWidget()),
           const NewsWidget(),
           MovieListWidget(),
           TWShowListWidget(),
