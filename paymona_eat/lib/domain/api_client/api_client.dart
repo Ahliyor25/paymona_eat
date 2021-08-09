@@ -115,12 +115,12 @@ class ApiClient {
       return response;
     };
     final result = _get(
-      'main_slider/get/7',
+      'main_slider/get/$eatId',
       parser,
-      // <String, dynamic>{
-      //   // 'api_key': api_key,
-      //   // 'page': eatId.toString(),
-      // },
+      <String, dynamic>{
+        'api_key': api_key,
+        // 'page': eatId.toString(),
+      },
     );
     return result;
   }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 class EatDetailsModel extends ChangeNotifier {
   final _apiClinet = ApiClient();
-
   final int eatId;
   EatDetails? _eatDetails;
 
